@@ -3,8 +3,10 @@ import MainLayout from '../layouts/main/MainLayout'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import { apiBaseUrl } from '../consts/api'
+import axios from 'axios'
 
-class SignIn extends Component {
+class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,6 +14,27 @@ class SignIn extends Component {
             password:''
         }    
     }
+
+    handleClick(event){
+        var self = this;
+        var payload={
+            "email":this.state.username,
+            "password":this.state.password
+        }
+        axios.post(apiBaseUrl+'login', payload)
+        .then(function (response) {
+            console.log(response);
+            if(response.data.code == 200){
+                console.log("Login successfull");
+            } else {
+                console.log("wrong credentials");
+                alert("wrong credentials");
+            }
+        })
+        .catch(function (error) {
+            console.log(error)
+        });
+     }
     
     render() {
         return (
@@ -52,4 +75,4 @@ const paperStyle = {
     width: 280
 }
 
-export default SignIn
+export default Login

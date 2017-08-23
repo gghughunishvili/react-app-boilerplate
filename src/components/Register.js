@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import MainLayout from '../layouts/main/MainLayout'
 
-class SignUp extends Component {
+class Register extends Component {
     render() {
         return (
             <MainLayout>
@@ -11,4 +11,4 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp
+export default Register
