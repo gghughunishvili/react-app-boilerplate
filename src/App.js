@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Router, Route } from 'react-router';
 import { connect } from 'react-redux';
 
@@ -9,7 +9,7 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
 
-class App extends React.Component {
+class App extends Component {
     constructor(props) {
         super(props);
 
@@ -54,8 +54,7 @@ function mapStateToProps(state) {
     };
 }
 
-const connectedApp = connect(mapStateToProps)(App);
-export default { connectedApp };
+export default connect(mapStateToProps)(App);
 
 /*
 // Old Stuf here
