@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Collapse,
   Navbar,
@@ -13,39 +14,16 @@ import {
   DropdownItem } from 'reactstrap';
 
 export default class MyNavbar extends Component {
-  constructor(props) {
-    super(props);
-    this.toggle = this.toggle.bind(this);
-    this.logoutClickHandler = this.logoutClickHandler.bind(this);
-    this.loginClickHandler = this.loginClickHandler.bind(this);
-    this.state = {
-      isOpen: false,
-      isAuthorized: false
-    };
-  }
-  toggle() {
-    this.setState({
-      isOpen: !this.state.isOpen
-    });
-  }
-
-  logoutClickHandler() {
-    this.setState({isAuthorized: false});
-  }
-
-  loginClickHandler() {
-    this.setState({isAuthorized: true});
-  }
 
   render() {
     var showMenu;
-    if (!this.state.isAuthorized) {
+    if (true) {
       showMenu = [
           <NavItem key={1}>
-            <NavLink href="/">Register</NavLink>
+            <NavLink><Link to="/register">Register</Link></NavLink>
           </NavItem>,
           <NavItem key={2}>
-            <NavLink href="#" onClick={this.loginClickHandler}>Login</NavLink>
+            <NavLink><Link to="/login">Login</Link></NavLink>
           </NavItem>
       ];
     } else {
@@ -72,7 +50,7 @@ export default class MyNavbar extends Component {
         <Navbar color="faded" light expand="md">
           <NavbarBrand href="/">MyApp</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
-          <Collapse isOpen={this.state.isOpen} navbar>
+          <Collapse isOpen={true} navbar>
             <Nav className="ml-auto" navbar>
               {showMenu}
             </Nav>

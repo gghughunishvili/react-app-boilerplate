@@ -8,13 +8,14 @@ import { PrivateRoute } from './components/PrivateRoute';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
+import MyNavbar from './container/MyNavbar';
 
 class App extends Component {
     constructor(props) {
         super(props);
 
         // this line is required to work on plunker because the app preview runs on a subfolder url
-        history.push('/');
+        //history.push('/');
 
         const { dispatch } = this.props;
         history.listen((location, action) => {
@@ -26,22 +27,25 @@ class App extends Component {
     render() {
         const { alert } = this.props;
         return (
-            <div className="jumbotron">
-                <div className="container">
-                    <div className="col-sm-8 col-sm-offset-2">
-                        {alert.message &&
-                            <div className={`alert ${alert.type}`}>{alert.message}</div>
-                        }
-                        <Router history={history}>
-                            <div>
-                                <PrivateRoute exact path='/' component={Home} />
-                                <Route path="/login" component={Login} />
-                                <Route path="/register" component={Register} />
+            <Router history={history}>
+                <div>
+                    <MyNavbar />
+                    <div className="jumbotron">
+                        <div className="container">
+                            <div className="col-sm-8 col-sm-offset-2">
+                                {alert.message &&
+                                    <div className={`alert ${alert.type}`}>{alert.message}</div>
+                                }
+                                <div>
+                                    <PrivateRoute exact path='/' component={Home} />
+                                    <Route path="/login" component={Login} />
+                                    <Route path="/register" component={Register} />
+                                </div>
                             </div>
-                        </Router>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </Router>
         );
     }
 }
