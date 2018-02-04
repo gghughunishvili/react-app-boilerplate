@@ -24,22 +24,44 @@ function login(username, password) {
 
     return fetch(config.apiUrl + '/oauth/token', requestOptions)
         .then(handleResponse, handleError)
-        .then(user => {
-            console.log(user);
-            debugger;
-            // login successful if there's a jwt token in the response
-            if (user && user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('user', JSON.stringify(user));
+        .then(token => {
+            // login successful if there's a token in the response
+            if (token && token.access_token) {
+                // store token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('token', JSON.stringify(token));
             }
 
-            return user;
+            // Now fetch authorized user's data
+            return getAuthorizedUser();
+        });
+}
+
+function getAuthorizedUser() {
+    const requestOptions = {
+        method: 'GET',
+        headers: { ...authHeader(), 'Content-Type': 'application/json' }
+    }
+    console.log(requestOptions);
+
+    return fetch(config.apiUrl + '/users/me', requestOptions)
+        .then(handleResponse, handleError)
+        .then(response => {
+            // login successful if there's a jwt token in the response
+            if (response && response.data) {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                localStorage.setItem('user', JSON.stringify(response.data));
+            }
+
+            return response.data;
         });
 }
 
 function logout() {
-    // remove user from local storage to log user out
+    // First revoke existed token
+
+    // Then remove user from local storage to log user out
     localStorage.removeItem('user');
+
 }
 
 function getAll() {
