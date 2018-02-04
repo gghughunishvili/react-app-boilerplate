@@ -24,7 +24,6 @@ class App extends Component {
     }
 
     render() {
-        const basePath = '/' + window.location.pathname.split('/')[1];
         const { alert } = this.props;
         return (
             <div className="jumbotron">

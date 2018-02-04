@@ -58,7 +58,6 @@ function getAuthorizedUser() {
 
 function logout() {
     // First revoke existed token
-
     // Then remove user from local storage to log user out
     localStorage.removeItem('user');
 
@@ -89,7 +88,7 @@ function register(user) {
         body: JSON.stringify(user)
     };
 
-    return fetch(config.apiUrl + '/users/register', requestOptions).then(handleResponse, handleError);
+    return fetch(config.apiUrl + '/users', requestOptions).then(handleResponse, handleError);
 }
 
 function update(user) {
