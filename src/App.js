@@ -30,7 +30,7 @@ class App extends Component {
             <Router history={history}>
                 <div>
                     <MyNavbar />
-                    <div className="jumbotron">
+                    <div className="jumbotron" stye={{height: '100vh'}}>
                         <div className="container">
                             <div className="col-sm-8 col-sm-offset-2">
                                 {alert.message &&
